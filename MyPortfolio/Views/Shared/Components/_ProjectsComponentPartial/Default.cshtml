@@ -1,0 +1,136 @@
+﻿@{
+    Layout = null;
+} 
+
+<section id="projects" class="projects" aria-labelledby="projects-title">
+      <div class="giant-row" aria-hidden="true">
+        <span class="giant giant-rv">projeler</span>
+        <div class="rbadge rbadge--dark">
+          <svg class="rbadge__ring" viewBox="0 0 160 160"><defs><path id="rb-proj" d="M80,80 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0"/></defs><text><textPath href="#rb-proj" textLength="385" lengthAdjust="spacing">SEÇİLMİŞ ÇALIŞMALAR • FİKİRDEN ÜRÜNE • </textPath></text></svg>
+          <span class="rbadge__core"><svg class="ico" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="sec-head projects__head">
+          <div>
+            <p class="eyebrow rv">-SEÇİLMİŞ ÇALIŞMALAR</p>
+            <h2 id="projects-title" class="sec-title rv d1">Fikirden Ürüne Dönüşen Projeler</h2>
+          </div>
+          <p class="sec-lead rv d2">Öğrenme, üretme ve problem çözme süreçlerimin birer yansıması olan projelerimden bazıları.</p>
+        </div>
+
+        <div class="filters rv d2" role="group" aria-label="Projeleri kategoriye göre filtrele">
+          <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">Tümü</button>
+          <button class="filter" type="button" data-filter="web" aria-pressed="false">Web Uygulamaları</button>
+          <button class="filter" type="button" data-filter="ai" aria-pressed="false">Yapay Zeka</button>
+          <button class="filter" type="button" data-filter="mobile" aria-pressed="false">Mobil</button>
+          <button class="filter" type="button" data-filter="micro" aria-pressed="false">Mikroservisler</button>
+        </div>
+        <p class="visually-hidden" aria-live="polite" data-filter-status></p>
+
+        <div class="row gx-4 gy-5 align-items-start">
+
+          <div class="col-12 col-md-6 pwrap rv d1" data-cats="web ai">
+            <article class="pcard">
+              <a class="pthumb" href="#projects" aria-label="Yapay Zeka Destekli Seyahat Asistanı projesini incele">
+                <div class="pthumb__inner" aria-hidden="true">
+                  <div class="mock">
+                    <div class="mock__bar"><span></span><span></span><span></span></div>
+                    <div class="mock__body">
+                      <div class="bubbles"><span class="bubble"></span><span class="bubble bubble--out"></span><span class="bubble bubble--short"></span><span class="bubble bubble--out bubble--short"></span></div>
+                      <div class="mini-map"><svg viewBox="0 0 120 90" preserveAspectRatio="none"><path d="M14 74 C 44 70, 40 26, 70 30 S 100 40, 106 14"/></svg><span class="pin pin--a"></span><span class="pin pin--b"></span></div>
+                    </div>
+                  </div>
+                </div>
+                <span class="pthumb__idx" aria-hidden="true">01</span>
+                <span class="pthumb__go" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+              </a>
+              <div class="pcap"><h3 class="pcap__title">Yapay Zeka Destekli Seyahat Asistanı</h3><span class="pcap__cat">Yapay Zeka, Web</span></div>
+              <p class="pdesc">Yapay zeka servisleri ve gerçek zamanlı veri entegrasyonlarıyla kişiselleştirilmiş seyahat önerileri sunan uygulama.</p>
+              <div class="pfoot">
+                <ul class="tags" aria-label="Kullanılan teknolojiler"><li class="tag">ASP.NET Core</li><li class="tag">Web API</li><li class="tag">OpenAI</li><li class="tag">SQL Server</li></ul>
+                <a class="cta-link" href="#projects">Projeyi İncele</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-12 col-md-6 pwrap is-offset rv d2" data-cats="web micro">
+            <article class="pcard">
+              <a class="pthumb" href="#projects" aria-label="Mikroservis E-Ticaret Platformu projesini incele">
+                <div class="pthumb__inner" aria-hidden="true">
+                  <div class="nodes">
+                    <svg viewBox="0 0 160 100" preserveAspectRatio="none"><path d="M80 50 L27 20 M80 50 L133 20 M80 50 L27 80 M80 50 L133 80"/></svg>
+                    <span class="node node--1">katalog</span>
+                    <span class="node node--2">sepet</span>
+                    <span class="node node--3">sipariş</span>
+                    <span class="node node--4">ödeme</span>
+                    <span class="node node--hub">API Gateway</span>
+                  </div>
+                </div>
+                <span class="pthumb__idx" aria-hidden="true">02</span>
+                <span class="pthumb__go" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+              </a>
+              <div class="pcap"><h3 class="pcap__title">Mikroservis E-Ticaret Platformu</h3><span class="pcap__cat">Mikroservis, Web</span></div>
+              <p class="pdesc">Bağımsız servisler, dağıtık sistem bileşenleri ve modern backend teknolojileriyle geliştirilen e-ticaret altyapısı.</p>
+              <div class="pfoot">
+                <ul class="tags" aria-label="Kullanılan teknolojiler"><li class="tag">.NET</li><li class="tag">Microservices</li><li class="tag">Docker</li><li class="tag">Redis</li></ul>
+                <a class="cta-link" href="#projects">Projeyi İncele</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-12 col-md-6 pwrap rv d1" data-cats="web ai">
+            <article class="pcard">
+              <a class="pthumb" href="#projects" aria-label="Akıllı Satış Analiz Platformu projesini incele">
+                <div class="pthumb__inner" aria-hidden="true">
+                  <div class="mock">
+                    <div class="mock__bar"><span></span><span></span><span></span></div>
+                    <div class="chart">
+                      <div class="kpis"><span></span><span></span><span></span></div>
+                      <div class="bars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                    </div>
+                  </div>
+                </div>
+                <span class="pthumb__idx" aria-hidden="true">03</span>
+                <span class="pthumb__go" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+              </a>
+              <div class="pcap"><h3 class="pcap__title">Akıllı Satış Analiz Platformu</h3><span class="pcap__cat">Yapay Zeka, Veri</span></div>
+              <p class="pdesc">Veri analizi ve makine öğrenmesi teknikleriyle satış eğilimlerini analiz eden ve tahminler üreten yönetim platformu.</p>
+              <div class="pfoot">
+                <ul class="tags" aria-label="Kullanılan teknolojiler"><li class="tag">ASP.NET Core</li><li class="tag">ML.NET</li><li class="tag">SQL Server</li></ul>
+                <a class="cta-link" href="#projects">Projeyi İncele</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-12 col-md-6 pwrap is-offset rv d2" data-cats="mobile">
+            <article class="pcard">
+              <a class="pthumb" href="#projects" aria-label="Mobil Seyahat Rezervasyon Uygulaması projesini incele">
+                <div class="pthumb__inner" aria-hidden="true">
+                  <div class="phones">
+                    <div class="phone phone--back"><div class="phone__screen"><span class="phone__hero phone__hero--alt"></span><span class="phone__row"></span><span class="phone__row phone__row--short"></span></div></div>
+                    <div class="phone"><div class="phone__screen"><span class="phone__hero"></span><span class="phone__row"></span><span class="phone__row phone__row--short"></span><span class="phone__row"></span><span class="phone__btn"></span></div></div>
+                  </div>
+                </div>
+                <span class="pthumb__idx" aria-hidden="true">04</span>
+                <span class="pthumb__go" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+              </a>
+              <div class="pcap"><h3 class="pcap__title">Mobil Seyahat Rezervasyon Uygulaması</h3><span class="pcap__cat">Mobil</span></div>
+              <p class="pdesc">Modern mobil arayüzler ve dinamik rezervasyon süreçleriyle oluşturulan kullanıcı odaklı seyahat uygulaması.</p>
+              <div class="pfoot">
+                <ul class="tags" aria-label="Kullanılan teknolojiler"><li class="tag">.NET MAUI</li><li class="tag">C#</li><li class="tag">SQLite</li></ul>
+                <a class="cta-link" href="#projects">Projeyi İncele</a>
+              </div>
+            </article>
+          </div>
+
+        </div>
+
+        <div class="projects-more rv">
+          <a class="btn-pill" href="https://github.com/" target="_blank" rel="noopener">Tüm Projelerimi Gör
+            <span class="btn-pill__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>

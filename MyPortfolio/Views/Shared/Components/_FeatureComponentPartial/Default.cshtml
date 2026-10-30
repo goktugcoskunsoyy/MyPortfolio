@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+@model List<MyPortfolio.Entities.Feature>
+
+ <section id="home" class="hero" aria-labelledby="hero-title">
+      <div class="hero__giant" aria-hidden="true"><span class="giant giant-rv">yazılım</span></div>
+      <div class="sunburst" aria-hidden="true"></div>
+      <span class="dot dot--1" aria-hidden="true"></span>
+      <span class="dot dot--2" aria-hidden="true"></span>
+      <span class="dot dot--3" aria-hidden="true"></span>
+      <span class="dot dot--4" aria-hidden="true"></span>
+     
+    @foreach (var Feature in Model)
+    {
+        <div class="hero__content">
+            <p class="eyebrow rv"> @Feature.FeatureGreeting </p>
+            <h1 id="hero-title" class="hero__title rv d1">@Feature.FeatureTitle</h1>
+            <p class="visually-hidden">Bilgisayar Mühendisi, .NET Backend Developer, Yazılım Geliştiricisi, Yazılım Mimarı, Yapay Zeka Meraklısı</p>
+            <div class="typing rv d2" aria-hidden="true"><span class="typing__text" data-typing>Bilgisayar Mühendisi</span><span class="caret"></span></div>
+            <p class="hero__text rv d3">@Feature.FreatureDescription</p>
+            <div class="hero__actions rv d4">
+                <a class="btn-pill" href="#projects">Projelerimi Keşfet
+                    <span class="btn-pill__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                </a>
+                <a class="cta-link" href="#contact">Benimle İletişime Geç</a>
+            </div>
+            <div class="socials rv d5">
+                <a class="social-link" href="https://github.com/goktugcoskunsoyy" target="_blank" rel="noopener">GitHub <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+                <a class="social-link" href="https://www.linkedin.com/in/goktugtalha/" target="_blank" rel="noopener">LinkedIn <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>          <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+            </div>
+        </div>
+
+        <ul class="hero__labels rv d6">
+            <li class="hl"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg>Yazılım Geliştiricisi</li>        <li class="hl"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Bursa, Türkiye</li>        <li class="hl"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>Bilgisayar Mühendisi</li>
+        </ul>
+
+        <a class="v-cue" href="#about"><span class="v-cue__text">Aşağı Kaydır</span><span class="v-cue__line" aria-hidden="true"></span></a>
+    }
+     </section>
+
+      

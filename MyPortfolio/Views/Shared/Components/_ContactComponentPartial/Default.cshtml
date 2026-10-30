@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+
+ <section id="contact" class="contact" aria-labelledby="contact-title">
+      <div class="together" aria-hidden="true">
+        <span class="giant together__ink giant-rv">birlikte</span>
+        <span class="giant giant-rv">çalışalım</span>
+        <div class="rbadge">
+          <svg class="rbadge__ring" viewBox="0 0 160 160"><defs><path id="rb-contact" d="M80,80 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0"/></defs><text><textPath href="#rb-contact" textLength="385" lengthAdjust="spacing">BİRLİKTE ÇALIŞALIM • BURSA, TÜRKİYE •</textPath></text></svg>
+          <span class="rbadge__core"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="contact__head">
+          <div>
+            <p class="eyebrow rv">-İLETİŞİME GEÇELİM</p>
+            <h2 id="contact-title" class="contact__title rv d1">Harika Bir Fikrin mi Var? <strong class="ul">Birlikte Hayata Geçirelim.</strong></h2>
+          </div>
+          <p class="sec-lead rv d2">Yeni projeler, eğitimler, iş birlikleri veya yalnızca teknoloji üzerine sohbet etmek için benimle iletişime geçebilirsin.</p>
+        </div>
+
+        <div class="contact__grid">
+          <div class="rv d2">
+            <ul class="c-list">
+              <li class="c-item">
+                <span class="c-item__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+                <span><span class="c-item__label">E-posta</span><a class="c-item__value" href="mailto:goktugcoskunsoy@icloud.com">goktugcoskunsoy@icloud.com</a></span>
+              </li>
+              <li class="c-item">
+                <span class="c-item__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+                <span><span class="c-item__label">Konum</span><span class="c-item__value">Bursa, Türkiye</span></span>
+              </li>
+            </ul>
+            <p class="soc-title">Sosyal medya</p>
+            <div class="soc-row">
+              <a class="soc" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">Li.</a>
+              <a class="soc" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">Gh.</a>              <a class="soc" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">Ig.</a>
+            </div>
+          </div>
+
+          <div class="form-card rv d3">
+            <h3 class="form-card__title">Bana bir mesaj bırak</h3>
+            <p class="form-card__sub">Genellikle birkaç iş günü içinde dönüş yapıyorum.</p>
+
+            <!-- When the backend is ready, set data-backend-ready="true"; the form will POST to /Home/Contact.
+                 In the Razor view, remember to add an antiforgery token inside the form. -->
+            <form id="contact-form" action="/Home/Contact" method="post" novalidate data-backend-ready="false" aria-describedby="privacy-note">
+              <div class="row g-3">
+                <div class="col-12 col-md-6 field">
+                  <label for="cf-name">Adınız Soyadınız <span class="req" aria-hidden="true">*</span></label>
+                  <input class="input" id="cf-name" name="name" type="text" autocomplete="name" required maxlength="100" placeholder="Örn. Ayşe Yılmaz" aria-invalid="false" aria-describedby="cf-name-err">
+                  <p class="field-error" id="cf-name-err"></p>
+                </div>
+                <div class="col-12 col-md-6 field">
+                  <label for="cf-email">E-posta Adresiniz <span class="req" aria-hidden="true">*</span></label>
+                  <input class="input" id="cf-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="150" placeholder="ornek@alanadi.com" aria-invalid="false" aria-describedby="cf-email-err">
+                  <p class="field-error" id="cf-email-err"></p>
+                </div>
+                <div class="col-12 field">
+                  <label for="cf-subject">Konu <span class="req" aria-hidden="true">*</span></label>
+                  <input class="input" id="cf-subject" name="subject" type="text" required maxlength="150" placeholder="Proje, eğitim, iş birliği…" aria-invalid="false" aria-describedby="cf-subject-err">
+                  <p class="field-error" id="cf-subject-err"></p>
+                </div>
+                <div class="col-12 field">
+                  <label for="cf-message">Mesajınız <span class="req" aria-hidden="true">*</span></label>
+                  <textarea class="input" id="cf-message" name="message" rows="5" required maxlength="4000" placeholder="Fikrinden biraz bahset…" aria-invalid="false" aria-describedby="cf-message-err"></textarea>
+                  <p class="field-error" id="cf-message-err"></p>
+                </div>
+              </div>
+              <div class="form-foot">
+                <button class="btn-pill btn-pill--block" type="submit">Mesajımı Gönder
+                  <span class="btn-pill__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                </button>
+                <p class="privacy" id="privacy-note"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Bu formu göndererek paylaştığın bilgilerin yalnızca mesajına yanıt vermek amacıyla kullanılmasını kabul etmiş olursun. Bilgilerin üçüncü kişilerle paylaşılmaz.</span></p>
+                <p class="form-note" role="status" aria-live="polite" data-form-note></p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>

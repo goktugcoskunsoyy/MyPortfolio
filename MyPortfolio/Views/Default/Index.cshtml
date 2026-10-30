@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="tr">
+
+@await Component.InvokeAsync("_HeadComponentPartial")
+
+<body>
+
+<div class="v2">
+
+
+  @await Component.InvokeAsync("_NavbarComponentPartial")
+
+  <main>
+
+   @await Component.InvokeAsync("_FeatureComponentPartial")
+
+   
+   @await Component.InvokeAsync("_AboutComponentPartial")
+
+   
+   @await Component.InvokeAsync("_SkillComponentPartial")
+
+    
+   @await Component.InvokeAsync("_ExperienceComponentPartial")
+
+    
+   @await Component.InvokeAsync("_ProjectsComponentPartial")
+
+   
+   @await Component.InvokeAsync("_EducationComponentPartial")
+
+    
+    @await Component.InvokeAsync("_PhilosophyComponentPartial")
+
+    
+   @await Component.InvokeAsync("_ContactComponentPartial")
+
+  </main>
+
+  @await Component.InvokeAsync("_FooterComponentPartial")
+  </div>
+
+<!-- Java Script
+================================================== -->
+<script src="~/MyPortfolioTheme/js/main.js"></script>
+</body>
+</html>

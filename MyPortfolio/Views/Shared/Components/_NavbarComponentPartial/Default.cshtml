@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+}
+
+<header class="site-nav" data-site-nav>
+    <div class="wrap site-nav__inner">
+      <a class="brand" href="#home" aria-label="Göktuğ Talha Coşkunsoy, Ana Sayfa">
+        <span class="brand__mark" aria-hidden="true">GTC</span>
+        <span>Göktuğ Talha Coşkunsoy</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Ana menü">
+        <a class="nav-link-x is-active" href="#home" data-nav="home" aria-current="true"><span>Ana Sayfa</span></a>
+        <a class="nav-link-x" href="#about" data-nav="about"><span>Hakkımda</span></a>
+        <a class="nav-link-x" href="#skills" data-nav="skills"><span>Yeteneklerim</span></a>
+        <a class="nav-link-x" href="#experience" data-nav="experience"><span>Deneyimlerim</span></a>
+        <a class="nav-link-x" href="#projects" data-nav="projects"><span>Projelerim</span></a>
+        <a class="nav-link-x" href="#education" data-nav="education"><span>Eğitim</span></a>
+        <a class="nav-link-x" href="#contact" data-nav="contact"><span>İletişim</span></a>
+      </nav>
+
+      <div class="nav-right">
+        <a class="btn-pill btn-pill--sm nav-cta" href="#contact">Birlikte Çalışalım
+          <span class="btn-pill__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <button class="burger" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Menüyü aç" data-menu-toggle>
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+       <!-- Mobile menu -->
+  <div id="mobile-menu" class="mmenu" data-menu>
+    <nav aria-label="Mobil menü">
+      <ul class="mmenu__list">
+        <li><a class="mmenu__link is-active" href="#home" data-nav="home"><small>01</small>Ana Sayfa</a></li>
+        <li><a class="mmenu__link" href="#about" data-nav="about"><small>02</small>Hakkımda</a></li>
+        <li><a class="mmenu__link" href="#skills" data-nav="skills"><small>03</small>Yeteneklerim</a></li>
+        <li><a class="mmenu__link" href="#experience" data-nav="experience"><small>04</small>Deneyimlerim</a></li>
+        <li><a class="mmenu__link" href="#projects" data-nav="projects"><small>05</small>Projelerim</a></li>
+        <li><a class="mmenu__link" href="#education" data-nav="education"><small>06</small>Eğitim</a></li>
+        <li><a class="mmenu__link" href="#contact" data-nav="contact"><small>07</small>İletişim</a></li>
+      </ul>
+    </nav>
+    <div class="mmenu__foot">
+      <a href="mailto:example@mail.com">example@mail.com</a>
+      <div class="mmenu__soc">
+        <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">Gh.</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">Li.</a>        <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">Ig.</a>
+      </div>
+    </div>
+  </div>

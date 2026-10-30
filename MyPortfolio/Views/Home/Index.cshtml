@@ -1,0 +1,1194 @@
+﻿@{
+Layout = null;
+}
+
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Göktuğ Talha Coşkunsoy | Yazılım Geliştirici</title>
+  <meta name="description" content="Göktuğ Talha Coşkunsoy: .NET ekosistemi, yazılım mimarileri ve yapay zeka destekli uygulamalar üzerine çalışan yazılım geliştiricisi.">
+  <meta name="theme-color" content="#FFFFFF">
+
+  <!-- Fontlar -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+  <!-- Bootstrap 5 (ASP.NET Core MVC şablonunda _Layout.cshtml zaten yüklüyorsa bu satırı kaldırın) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+  <!-- Animasyonlar yalnızca destekleniyorsa ve kullanıcı hareketi azaltmayı seçmediyse açılır -->
+  <script>
+    (function () {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduce && 'IntersectionObserver' in window) document.documentElement.classList.add('js-motion');
+    })();
+  </script>
+
+  <!-- ===================================================================
+       STİLLER (MVC'de: wwwroot/css/site.css dosyasına taşıyın)
+       =================================================================== -->
+  <style>
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#FFFFFF}
+    a{color:inherit;text-decoration:none}
+    h1,h2,h3,h4,p,blockquote,figure,dl,dd{margin:0}
+    ul,ol{list-style:none;margin:0;padding:0}
+    .menu-locked{overflow:hidden}
+
+    /* ---------- Tasarım değişkenleri ---------- */
+    .v2{
+      --accent:#BEFF01; --ink:#1C1D1F; --ink-soft:#3A3B3E; --muted:#6F7071;
+      --soft:#F5F5F2; --line:rgba(28,29,31,.10); --line-2:rgba(28,29,31,.20); --grid:rgba(28,29,31,.055);
+      --error:#B42318;
+      --f:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --ease:cubic-bezier(.22,.8,.2,1);
+      --gutter:clamp(20px, 4vw, 40px);
+      --sec:clamp(80px, 8vw, 116px);
+      --r-sm:8px; --r-md:12px; --r-lg:20px; --r-pill:999px;
+      position:relative; overflow-x:clip;
+      color:var(--ink); font-family:var(--f); font-size:17px; line-height:1.7;
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+      background-color:#FFFFFF;
+      background-image:linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size:calc(100% / 12) 100%;
+    }
+    .v2 *, .v2 *::before, .v2 *::after{box-sizing:border-box}
+    .v2 :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:6px}
+    .ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+    .wrap{position:relative;width:100%;max-width:1240px;margin-inline:auto;padding-inline:var(--gutter)}
+    .section{position:relative;padding-block:var(--sec);scroll-margin-top:60px}
+    .section--soft{background:var(--soft)}
+    @@keyframes spin{to{transform:rotate(360deg)}}
+
+    /* ---------- Tipografi ---------- */
+    .eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;line-height:1.4;text-transform:uppercase;color:var(--ink)}
+    .sec-title{margin-top:22px;font-size:clamp(36px, 3vw + 20px, 64px);font-weight:600;line-height:1.02;letter-spacing:-.048em;text-wrap:balance}
+    .sec-title--narrow{max-width:17ch}
+    .sec-lead{color:var(--muted);font-size:clamp(16px, .3vw + 15px, 18px);font-weight:400;line-height:1.75;max-width:46ch;text-wrap:pretty}
+    .ul{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.18em}
+    .sec-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px 64px;align-items:end;margin-bottom:60px}
+    .sec-head .sec-lead{justify-self:end}
+    .giant{display:block;font-weight:600;line-height:.78;letter-spacing:-.07em;color:var(--accent);white-space:nowrap;user-select:none;pointer-events:none}
+
+    /* ---------- Butonlar ---------- */
+    .btn-pill{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:54px;padding:0 9px 0 26px;border-radius:var(--r-pill);border:0;background:var(--ink);color:#FFFFFF;font-family:var(--f);font-size:15px;font-weight:600;letter-spacing:-.01em;cursor:pointer;transition:transform .45s var(--ease), background-color .3s, box-shadow .45s var(--ease)}
+    .btn-pill:hover{color:#FFFFFF;background:#000000;transform:translateY(-2px);box-shadow:0 18px 34px -18px rgba(28,29,31,.6)}
+    .btn-pill__icon{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--ink);transition:transform .5s var(--ease)}
+    .btn-pill__icon .ico{width:17px;height:17px}
+    .btn-pill:hover .btn-pill__icon{transform:rotate(-45deg)}
+    .btn-pill--sm{min-height:46px;padding:0 7px 0 20px;font-size:14px;gap:12px}
+    .btn-pill--sm .btn-pill__icon{width:32px;height:32px}
+    .btn-pill--block{width:100%;justify-content:space-between}
+
+    .cta-link{position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 6px 0 20px;font-size:13.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+    .cta-link::before{content:"";position:absolute;left:0;top:50%;z-index:-1;width:48px;height:48px;border-radius:24px;background:var(--accent);transform:translateY(-50%);transition:width .55s var(--ease)}
+    .cta-link:hover{color:var(--ink)}
+    .cta-link:hover::before{width:calc(100% + 16px)}
+    .cta-link .ico{width:16px;height:16px;transition:transform .45s var(--ease)}
+    .cta-link:hover .ico{transform:translateX(3px)}
+
+    /* ---------- Dönen rozet ---------- */
+    .rbadge{position:relative;display:grid;place-items:center;flex:none;width:150px;height:150px;border-radius:50%;background:#FFFFFF;color:var(--ink);box-shadow:0 24px 44px -26px rgba(28,29,31,.45)}
+    .rbadge--dark{background:var(--ink);color:#FFFFFF}
+    .rbadge::before{content:"";position:absolute;inset:36px;border-radius:50%;border:1px solid currentColor;opacity:.16}
+    .rbadge__ring{position:absolute;inset:0;width:100%;height:100%;animation:spin 18s linear infinite}
+    .rbadge__ring text{font-family:var(--f);font-size:11px;font-weight:700;letter-spacing:.1em;fill:currentColor}
+    .rbadge__core{position:relative;display:grid;place-items:center;width:62px;height:62px;border-radius:50%;background:var(--accent);color:var(--ink);font-size:21px;font-weight:700;letter-spacing:-.05em}
+    .rbadge__core .ico{width:24px;height:24px}
+
+    /* ---------- Navigasyon ---------- */
+    .site-nav{position:fixed;top:0;left:0;right:0;z-index:60;border-bottom:1px solid transparent;transition:background-color .45s var(--ease), border-color .45s, box-shadow .45s}
+    .site-nav.is-scrolled{background:rgba(255,255,255,.9);-webkit-backdrop-filter:saturate(150%) blur(14px);backdrop-filter:saturate(150%) blur(14px);border-bottom-color:var(--line);box-shadow:0 14px 34px -28px rgba(28,29,31,.45)}
+    .site-nav.is-menu-open{background:transparent;border-bottom-color:transparent;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+    .site-nav__inner{display:flex;align-items:center;justify-content:space-between;gap:20px;height:88px;transition:height .45s var(--ease)}
+    .site-nav.is-scrolled .site-nav__inner{height:70px}
+    .brand{display:inline-flex;align-items:center;gap:12px;font-size:16px;font-weight:600;letter-spacing:-.025em;white-space:nowrap;transition:color .3s}
+    .brand:hover{color:inherit}
+    .brand__mark{position:relative;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--ink);color:#FFFFFF;font-size:13px;font-weight:700;letter-spacing:.02em;transition:transform .6s var(--ease)}
+    .brand__mark::after{content:"";position:absolute;right:1px;top:3px;width:11px;height:11px;border-radius:50%;background:var(--accent);border:2px solid #FFFFFF}
+    .brand:hover .brand__mark{transform:rotate(-12deg)}
+    .site-nav.is-menu-open .brand{color:#FFFFFF}
+    .site-nav.is-menu-open .brand__mark{background:var(--accent);color:var(--ink)}
+    .site-nav.is-menu-open .brand__mark::after{border-color:var(--ink)}
+    .nav-links{display:flex;align-items:center;gap:2px}
+    .nav-link-x{display:inline-flex;align-items:center;min-height:44px;padding:0 13px;font-size:15px;font-weight:500;color:var(--ink)}
+    .nav-link-x span{background-image:linear-gradient(var(--accent), var(--accent));background-repeat:no-repeat;background-position:0 86%;background-size:0% 8px;transition:background-size .45s var(--ease)}
+    .nav-link-x:hover{color:var(--ink)}
+    .nav-link-x:hover span, .nav-link-x.is-active span{background-size:100% 8px}
+    .nav-right{display:flex;align-items:center;gap:10px}
+    .burger{display:none;position:relative;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:var(--ink);cursor:pointer;transition:background-color .35s}
+    .burger span{position:absolute;left:15px;right:15px;height:1.8px;border-radius:2px;background:#FFFFFF;transition:top .45s var(--ease), transform .45s var(--ease), opacity .25s, background-color .35s}
+    .burger span:nth-child(1){top:18px}
+    .burger span:nth-child(2){top:23.2px;right:21px}
+    .burger span:nth-child(3){top:28.4px}
+    .burger.is-open{background:var(--accent)}
+    .burger.is-open span{background:var(--ink)}
+    .burger.is-open span:nth-child(1){top:23.2px;transform:rotate(45deg)}
+    .burger.is-open span:nth-child(2){opacity:0;transform:translateX(-6px)}
+    .burger.is-open span:nth-child(3){top:23.2px;transform:rotate(-45deg)}
+
+    .mmenu{position:fixed;inset:0;z-index:55;display:flex;flex-direction:column;justify-content:space-between;gap:40px;overflow:auto;padding:112px var(--gutter) 36px;background:var(--ink);color:#FFFFFF;clip-path:circle(0px at calc(100% - var(--gutter) - 24px) 44px);visibility:hidden;transition:clip-path .75s cubic-bezier(.7,0,.2,1), visibility 0s linear .75s}
+    .mmenu.is-open{clip-path:circle(150vmax at calc(100% - var(--gutter) - 24px) 44px);visibility:visible;transition:clip-path .75s cubic-bezier(.7,0,.2,1), visibility 0s}
+    .mmenu__list{display:flex;flex-direction:column}
+    .mmenu__link{display:flex;align-items:baseline;gap:16px;padding:10px 0;font-size:clamp(30px, 5vw, 46px);font-weight:600;letter-spacing:-.045em;line-height:1.15;opacity:0;transform:translateY(18px);transition:opacity .5s, transform .6s var(--ease), color .25s}
+    .mmenu__link small{font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--accent)}
+    .mmenu__link:hover, .mmenu__link.is-active{color:var(--accent)}
+    .mmenu.is-open .mmenu__link{opacity:1;transform:none}
+    .mmenu.is-open li:nth-child(1) .mmenu__link{transition-delay:.18s}
+    .mmenu.is-open li:nth-child(2) .mmenu__link{transition-delay:.22s}
+    .mmenu.is-open li:nth-child(3) .mmenu__link{transition-delay:.26s}
+    .mmenu.is-open li:nth-child(4) .mmenu__link{transition-delay:.3s}
+    .mmenu.is-open li:nth-child(5) .mmenu__link{transition-delay:.34s}
+    .mmenu.is-open li:nth-child(6) .mmenu__link{transition-delay:.38s}
+    .mmenu.is-open li:nth-child(7) .mmenu__link{transition-delay:.42s}
+    .mmenu__foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);font-size:15px}
+    .mmenu__foot a:hover{color:var(--accent)}
+    .mmenu__soc{display:flex;gap:18px;font-weight:600}
+    .mmenu__soc a{display:inline-flex;align-items:center;min-height:44px}
+
+    /* ---------- Hero ---------- */
+    .hero{position:relative;min-height:clamp(780px, 100vh, 980px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:132px 0 96px;text-align:center;overflow:hidden;scroll-margin-top:0}
+    .hero__giant{position:absolute;left:50%;top:45%;z-index:0;transform:translate(-50%,-50%)}
+    .hero__giant .giant{font-size:22vw}
+    .sunburst{position:absolute;left:50%;top:45%;z-index:1;width:min(660px, 96vw);aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none}
+    .sunburst::before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(var(--accent) 0deg .6deg, transparent .6deg 4.5deg);-webkit-mask-image:radial-gradient(closest-side, transparent 50%, #000 51%, #000 98%, transparent 99%);mask-image:radial-gradient(closest-side, transparent 50%, #000 51%, #000 98%, transparent 99%);animation:spin 120s linear infinite}
+    .dot{position:absolute;z-index:1;border-radius:50%;pointer-events:none;animation:drift 9s ease-in-out infinite}
+    .dot--1{left:14%;top:23%;width:8px;height:8px;background:var(--ink)}
+    .dot--2{right:16%;top:19%;width:56px;height:56px;background:var(--accent);animation-delay:-3s}
+    .dot--3{left:22%;bottom:22%;width:12px;height:12px;background:var(--accent);animation-delay:-5s}
+    .dot--4{right:26%;bottom:28%;width:7px;height:7px;background:var(--ink);animation-delay:-1s}
+    @@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(6px,-10px)}}
+    .hero__content{position:relative;z-index:2;max-width:1080px;padding-inline:var(--gutter)}
+    .hero__title{margin-top:26px;font-size:clamp(42px, 4.6vw + 16px, 96px);font-weight:600;line-height:.98;letter-spacing:-.055em;text-wrap:balance}
+    .typing{display:flex;align-items:center;justify-content:center;gap:4px;min-height:1.7em;margin-top:30px;font-size:clamp(19px, .8vw + 14px, 26px);font-weight:600;letter-spacing:-.03em;white-space:nowrap}
+    .typing__text{padding:1px 12px 3px;border-radius:10px;background:var(--accent);color:var(--ink)}
+    .typing__text:empty{padding:0}
+    .caret{display:inline-block;width:2px;height:1.1em;margin-left:4px;background:var(--ink);animation:blink 1.05s steps(1) infinite}
+    @@keyframes blink{50%{opacity:0}}
+    .hero__text{max-width:54ch;margin:22px auto 0;color:var(--ink-soft);font-size:clamp(16px, .3vw + 15px, 18px);font-weight:500;line-height:1.7;text-wrap:pretty}
+    .hero__actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 28px;margin-top:34px}
+    .socials{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 22px;margin-top:22px}
+    .social-link{display:inline-flex;align-items:center;gap:5px;min-height:44px;font-size:14.5px;font-weight:600}
+    .social-link .ico{width:14px;height:14px;transition:transform .35s var(--ease)}
+    .social-link:hover{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+    .social-link:hover .ico{transform:translate(2px,-2px)}
+    .hero__labels{position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 48px;margin-top:64px;padding-inline:var(--gutter)}
+    .hl{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+    .hl .ico{width:16px;height:16px}
+    .v-cue{position:absolute;left:calc(var(--gutter) - 6px);bottom:40px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:12px;min-width:44px;padding:8px 0;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+    .v-cue:hover{color:var(--ink)}
+    .v-cue__text{writing-mode:vertical-rl;transform:rotate(180deg)}
+    .v-cue__line{position:relative;width:1px;height:52px;overflow:hidden;background:var(--line-2)}
+    .v-cue__line::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--ink);animation:cue 2.3s cubic-bezier(.6,0,.3,1) infinite}
+    @@keyframes cue{0%{top:-40%}100%{top:100%}}
+
+    /* ---------- Görsel yer tutucuları (gerçek fotoğraflarla değiştirin) ---------- */
+    .ph{position:relative;width:100%;height:100%;overflow:hidden;background:linear-gradient(160deg, #DCDCD8 0%, #BEBEBA 100%)}
+    .ph__head{position:absolute;left:50%;top:24%;width:28%;aspect-ratio:1;border-radius:50%;background:rgba(28,29,31,.1);transform:translateX(-50%)}
+    .ph__body{position:absolute;left:50%;bottom:-6%;width:70%;height:46%;border-radius:50% 50% 0 0 / 60% 60% 0 0;background:rgba(28,29,31,.1);transform:translateX(-50%)}
+    .ph__label{position:absolute;left:24px;bottom:22px;padding:6px 12px;border-radius:var(--r-pill);background:rgba(255,255,255,.85);font-size:11.5px;font-weight:600;letter-spacing:.04em;color:var(--ink)}
+    .ph-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+
+    /* ---------- Hakkımda ---------- */
+    .about{position:relative;padding-block:var(--sec);scroll-margin-top:60px}
+    .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,620px) minmax(0,620px) minmax(0,1fr);align-items:center}
+    .split__media{position:relative;grid-column:1 / 3;align-self:stretch;min-height:680px}
+    .split__media .ph{position:absolute;inset:0}
+    .split__badge{position:absolute;right:-75px;bottom:72px;z-index:3}
+    .split__body{position:relative;z-index:2;grid-column:3 / 4;padding:48px var(--gutter) 48px clamp(40px, 7vw, 112px)}
+    .about__copy{margin-top:32px;margin-left:clamp(0px, 9%, 72px)}
+    .about__intro{font-size:clamp(18px, .4vw + 16px, 21px);font-weight:500;line-height:1.6;letter-spacing:-.015em;color:var(--ink);text-wrap:pretty}
+    .about__text{margin-top:16px;color:var(--muted);text-wrap:pretty}
+    .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:36px;border-top:1px solid var(--ink)}
+    .stat{padding:22px 12px 0 0}
+    .stat + .stat{padding-left:20px;border-left:1px solid var(--line-2)}
+    .stat__num{display:block;font-size:clamp(34px, 2vw + 20px, 54px);font-weight:600;line-height:1;letter-spacing:-.06em}
+    .stat__label{display:block;margin-top:10px;font-size:14px;font-weight:500;color:var(--muted)}
+    .about__cta{margin-top:36px}
+
+    /* ---------- Yetenekler ---------- */
+    .skill{position:relative;display:flex;flex-direction:column;gap:18px;height:100%;padding:30px 30px 32px;border-radius:var(--r-lg);background:#FFFFFF;border:1px solid var(--line);transition:transform .5s var(--ease), box-shadow .5s var(--ease), border-color .4s}
+    .skill:hover{transform:translateY(-6px);border-color:var(--line-2);box-shadow:0 34px 60px -44px rgba(28,29,31,.4)}
+    .skill__head{display:flex;align-items:flex-start;justify-content:space-between}
+    .skill__num{font-size:84px;font-weight:600;line-height:.8;letter-spacing:-.07em;color:transparent;-webkit-text-stroke:1px rgba(28,29,31,.3);transition:color .45s, -webkit-text-stroke-color .45s}
+    .skill:hover .skill__num{color:var(--accent);-webkit-text-stroke-color:var(--accent)}
+    .skill__icon{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;border:1px solid var(--line-2);transition:background-color .35s, color .35s, border-color .35s}
+    .skill:hover .skill__icon{background:var(--ink);border-color:var(--ink);color:var(--accent)}
+    .skill__title{font-size:22px;font-weight:600;line-height:1.2;letter-spacing:-.035em}
+    .tags{display:flex;flex-wrap:wrap;gap:6px}
+    .tag{display:inline-flex;align-items:center;min-height:30px;padding:0 12px;border-radius:var(--r-pill);border:1px solid var(--line-2);background:#FFFFFF;font-size:13px;font-weight:500;line-height:1.2;color:var(--ink)}
+
+    /* ---------- Deneyim ---------- */
+    .xp__grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px, 6vw, 104px);align-items:start}
+    .xp__aside{position:sticky;top:120px}
+    .xp-list{border-top:1px solid var(--ink)}
+    .xp-row{position:relative;display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:0 28px;padding:30px 0;border-bottom:1px solid var(--line-2);transition:background-color .35s}
+    .xp-row:hover{background:var(--soft)}
+    .xp-row__idx{position:relative;margin-block:-30px;padding:34px 0 34px 6px;border-right:1px solid var(--ink);font-size:14px;font-weight:600}
+    .xp-row__idx::after{content:"";position:absolute;right:-6px;top:40px;width:11px;height:11px;border-radius:50%;background:#FFFFFF;border:1px solid var(--ink);transition:background-color .35s, transform .45s var(--ease)}
+    .xp-row:first-child .xp-row__idx::after, .xp-row:hover .xp-row__idx::after{background:var(--accent);transform:scale(1.3)}
+    .xp-row__title{font-size:clamp(20px, .5vw + 17px, 25px);font-weight:600;line-height:1.25;letter-spacing:-.035em}
+    .xp-org{display:inline-flex;align-items:center;gap:9px;margin-top:8px;font-size:15px;font-weight:600}
+    .xp-org::before{content:"";width:9px;height:9px;border-radius:2px;background:var(--accent);box-shadow:0 0 0 1px var(--ink)}
+    .xp-row__desc{margin-top:12px;color:var(--muted);text-wrap:pretty}
+    .date{align-self:start;padding:4px 10px;border-radius:7px;border:1px dashed var(--line-2);font-size:12.5px;font-weight:600;white-space:nowrap;color:var(--ink-soft)}
+
+    /* ---------- Projeler ---------- */
+    .projects{position:relative;padding-top:24px;padding-bottom:var(--sec);overflow:hidden;scroll-margin-top:60px}
+    .giant-row{position:relative;display:flex;align-items:flex-start;margin-left:calc(-1 * var(--gutter) - 1vw)}
+    .giant-row .giant{font-size:clamp(110px, 21vw, 340px)}
+    .giant-row .rbadge{margin-left:-3vw;margin-top:1vw;z-index:2}
+    .projects__head{margin-top:56px}
+    .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:48px}
+    .filter{min-height:44px;padding:0 20px;border-radius:var(--r-pill);border:1px solid var(--line-2);background:#FFFFFF;font-family:var(--f);font-size:14.5px;font-weight:500;color:var(--ink);cursor:pointer;transition:background-color .3s, color .3s, border-color .3s, transform .3s var(--ease)}
+    .filter:hover{border-color:var(--ink);transform:translateY(-1px)}
+    .filter.is-active{background:var(--ink);border-color:var(--ink);color:#FFFFFF}
+    .pwrap.is-hidden{display:none}
+    .pcard{display:flex;flex-direction:column;gap:20px;animation:cardIn .6s var(--ease)}
+    @@keyframes cardIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+    .pthumb{position:relative;display:block;aspect-ratio:3 / 2;border-radius:var(--r-sm);overflow:hidden;background:#ECECE8}
+    .pthumb__inner{position:absolute;inset:0;display:grid;place-items:center;filter:grayscale(1);transition:transform 1.1s var(--ease), filter .7s}
+    .pcard:hover .pthumb__inner{transform:scale(1.05);filter:grayscale(0)}
+    .pthumb__idx{position:absolute;left:18px;top:18px;padding:5px 11px;border-radius:var(--r-pill);background:#FFFFFF;font-size:12px;font-weight:600}
+    .pthumb__go{position:absolute;right:20px;bottom:20px;display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--accent);color:var(--ink);transform:scale(0) rotate(-45deg);transition:transform .55s var(--ease)}
+    .pcard:hover .pthumb__go, .pthumb:focus-visible .pthumb__go{transform:scale(1) rotate(0)}
+    .pcap{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+    .pcap__title{font-size:clamp(21px, .6vw + 16px, 27px);font-weight:600;line-height:1.2;letter-spacing:-.04em}
+    .pcap__cat{font-size:15px;color:var(--muted)}
+    .pdesc{color:var(--muted);font-size:16px;text-wrap:pretty;max-width:52ch}
+    .pfoot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+    .projects-more{display:flex;justify-content:center;margin-top:72px}
+
+    /* proje görseli çizimleri (gerçek ekran görüntüleriyle değiştirin) */
+    .mock{position:relative;width:72%;border-radius:12px;background:#FFFFFF;box-shadow:0 30px 50px -30px rgba(28,29,31,.45)}
+    .mock__bar{display:flex;gap:6px;padding:12px 14px;border-bottom:1px solid var(--line)}
+    .mock__bar span{width:8px;height:8px;border-radius:50%;background:#DEDEDA}
+    .mock__body{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;padding:16px}
+    .bubbles{display:flex;flex-direction:column;gap:8px}
+    .bubble{width:86%;height:22px;border-radius:12px 12px 12px 4px;background:#EDEDEA}
+    .bubble--out{align-self:flex-end;width:70%;border-radius:12px 12px 4px 12px;background:var(--accent)}
+    .bubble--short{width:52%}
+    .mini-map{position:relative;min-height:96px;border-radius:10px;background:#F2F2EF;overflow:hidden}
+    .mini-map svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:var(--ink);stroke-width:1.4;stroke-dasharray:4 4}
+    .pin{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 2px var(--ink)}
+    .pin--a{left:10%;bottom:16%}
+    .pin--b{right:10%;top:16%}
+    .nodes{position:relative;width:80%;aspect-ratio:16 / 10}
+    .nodes svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:rgba(28,29,31,.4);stroke-width:1.2;stroke-dasharray:3 5}
+    .node{position:absolute;padding:8px 13px;border-radius:10px;background:#FFFFFF;font-size:12px;font-weight:600;white-space:nowrap;transform:translate(-50%,-50%);box-shadow:0 14px 26px -18px rgba(28,29,31,.5)}
+    .node--hub{left:50%;top:50%;padding:12px 18px;background:var(--ink);color:var(--accent)}
+    .node--1{left:17%;top:20%}
+    .node--2{left:83%;top:20%}
+    .node--3{left:17%;top:80%}
+    .node--4{left:83%;top:80%}
+    .chart{display:flex;flex-direction:column;gap:14px;padding:16px}
+    .kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+    .kpis span{height:30px;border-radius:8px;background:#F2F2EF}
+    .kpis span:first-child{background:var(--ink)}
+    .bars{display:flex;align-items:flex-end;gap:7px;height:86px;border-bottom:1px solid var(--line)}
+    .bars span{flex:1;border-radius:4px 4px 0 0;background:#E4E4E0}
+    .bars span:nth-child(1){height:34%}
+    .bars span:nth-child(2){height:52%}
+    .bars span:nth-child(3){height:44%}
+    .bars span:nth-child(4){height:66%}
+    .bars span:nth-child(5){height:58%}
+    .bars span:nth-child(6){height:80%;background:var(--ink)}
+    .bars span:nth-child(7){height:72%;background:var(--accent)}
+    .bars span:nth-child(8){height:92%;background:var(--accent)}
+    .phones{display:flex;align-items:flex-end;gap:18px;height:84%}
+    .phone{width:118px;height:100%;padding:9px;border-radius:24px;background:var(--ink);box-shadow:0 30px 50px -28px rgba(28,29,31,.6)}
+    .phone--back{height:84%;transform:translateY(-6%)}
+    .phone__screen{display:flex;flex-direction:column;gap:8px;height:100%;padding:12px 10px;border-radius:16px;background:#FFFFFF}
+    .phone__hero{height:38%;border-radius:10px;background:var(--accent)}
+    .phone__hero--alt{background:#DEDEDA}
+    .phone__row{height:14px;border-radius:6px;background:#EDEDEA}
+    .phone__row--short{width:60%}
+    .phone__btn{margin-top:auto;height:22px;border-radius:var(--r-pill);background:var(--ink)}
+
+    /* ---------- Eğitim ---------- */
+    .section--edu{border-top:1px solid var(--line)}
+    .edu__grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px, 6vw, 104px);align-items:start}
+    .edu-quote{margin-top:40px;padding-top:30px;border-top:1px solid var(--ink)}
+    .edu-quote__mark{display:grid;place-items:center;width:58px;height:58px;padding-top:18px;border-radius:50%;background:var(--accent);font-size:48px;font-weight:700;line-height:1}
+    .edu-quote__text{margin-top:22px;font-size:clamp(22px, .8vw + 16px, 30px);font-weight:500;line-height:1.32;letter-spacing:-.035em;text-wrap:balance}
+    .edu-quote__note{margin-top:18px;color:var(--muted);font-size:16px;text-wrap:pretty}
+    .learn-tags{margin-top:22px}
+    .edu-list{border-top:1px solid var(--ink)}
+    .edu-row{display:grid;grid-template-columns:190px minmax(0,1fr);gap:14px 32px;padding:34px 0;border-bottom:1px solid var(--line-2)}
+    .edu-row__when{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+    .edu-level{display:inline-flex;align-items:center;min-height:30px;padding:0 13px;border-radius:var(--r-pill);background:var(--accent);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .edu-title{font-size:clamp(22px, .8vw + 17px, 30px);font-weight:600;line-height:1.2;letter-spacing:-.04em;text-wrap:balance}
+    .edu-inst{margin-top:10px;font-weight:600}
+    .edu-desc{margin-top:10px;color:var(--muted);text-wrap:pretty}
+    .ph-text{display:inline-block;padding:2px 9px;border-radius:7px;border:1px dashed var(--line-2);background:var(--soft);font-size:.86em;font-weight:600;color:var(--ink-soft)}
+
+    /* ---------- Felsefe ---------- */
+    .philo{position:relative;overflow:hidden;padding-block:clamp(96px, 10vw, 150px);background:var(--ink);color:#FFFFFF}
+    .philo::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.16) 1.2px, transparent 1.7px);background-size:14px 14px;-webkit-mask-image:radial-gradient(ellipse 60% 70% at 60% 50%, #000 0%, transparent 75%);mask-image:radial-gradient(ellipse 60% 70% at 60% 50%, #000 0%, transparent 75%);pointer-events:none}
+    .philo__grid{position:relative;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:48px;align-items:start}
+    .philo__mark{display:grid;place-items:center;width:clamp(96px, 9vw, 132px);aspect-ratio:1;padding-top:.28em;border-radius:50%;background:var(--accent);color:var(--ink);font-size:clamp(80px, 7vw, 112px);font-weight:700;line-height:1}
+    .philo__tag{margin-top:22px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+    .philo__quote{font-size:clamp(28px, 2.4vw + 14px, 52px);font-weight:500;line-height:1.16;letter-spacing:-.04em;text-wrap:balance}
+    .philo__quote .ul{text-decoration-color:var(--accent);text-decoration-thickness:3px;text-underline-offset:.16em}
+    .philo__sign{margin-top:32px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+
+    /* ---------- İletişim ---------- */
+    .contact{position:relative;padding-block:var(--sec);overflow:hidden;scroll-margin-top:40px}
+    .together{position:relative;display:flex;align-items:center;justify-content:center;gap:3vw;margin-inline:-8vw;white-space:nowrap}
+    .together .giant{font-size:clamp(96px, 16vw, 270px)}
+    .together__ink{color:var(--ink)}
+    .together .rbadge{position:absolute;left:50%;top:-14%;z-index:2;transform:translateX(-50%)}
+    .contact__head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px 64px;align-items:end;margin-top:72px}
+    .contact__title{margin-top:22px;font-size:clamp(28px, 1.6vw + 20px, 46px);font-weight:500;line-height:1.15;letter-spacing:-.04em;text-wrap:balance}
+    .contact__title strong{font-weight:600}
+    .contact__grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px, 6vw, 96px);align-items:start;margin-top:64px}
+    .c-list{border-top:1px solid var(--ink)}
+    .c-item{display:grid;grid-template-columns:48px minmax(0,1fr);align-items:center;gap:18px;padding:20px 0;border-bottom:1px solid var(--line-2)}
+    .c-item__icon{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--accent)}
+    .c-item__label{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    .c-item__value{display:inline-block;font-size:18px;font-weight:600;letter-spacing:-.02em}
+    a.c-item__value{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+    a.c-item__value:hover{color:var(--ink);text-decoration-thickness:2px}
+    .soc-title{margin-top:30px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    .soc-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .soc{display:grid;place-items:center;width:60px;height:60px;border-radius:50%;border:1px solid var(--line-2);background:#FFFFFF;font-size:15px;font-weight:600;letter-spacing:-.02em;transition:background-color .3s, border-color .3s, transform .45s var(--ease)}
+    .soc:hover{color:var(--ink);background:var(--accent);border-color:var(--accent);transform:translateY(-3px)}
+    .form-card{padding:clamp(24px, 3vw, 44px);border-radius:var(--r-lg);background:var(--soft)}
+    .form-card__title{font-size:24px;font-weight:600;letter-spacing:-.035em}
+    .form-card__sub{margin-top:4px;margin-bottom:28px;font-size:15px;color:var(--muted)}
+    .field label{display:block;margin-bottom:8px;font-size:14.5px;font-weight:600}
+    .req{color:var(--error)}
+    .input{display:block;width:100%;min-height:56px;padding:15px 18px;border-radius:var(--r-md);border:1px solid var(--line-2);background:#FFFFFF;font:inherit;font-size:16px;line-height:1.4;color:var(--ink);-webkit-appearance:none;appearance:none;transition:border-color .25s, box-shadow .25s}
+    .input::placeholder{color:#7A7B7D}
+    .input:hover{border-color:rgba(28,29,31,.4)}
+    .input:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 4px rgba(190,255,1,.55)}
+    .input[aria-invalid="true"]{border-color:var(--error);box-shadow:0 0 0 4px rgba(180,35,24,.12)}
+    textarea.input{min-height:160px;resize:vertical}
+    .field-error{margin-top:7px;font-size:13.5px;font-weight:500;color:var(--error)}
+    .field-error:empty{display:none}
+    .form-foot{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+    .privacy{display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.55;color:var(--muted)}
+    .privacy .ico{width:16px;height:16px;margin-top:2px;color:var(--ink)}
+    .form-note{padding:14px 16px;border-radius:var(--r-md);background:#FFFFFF;font-size:14.5px;box-shadow:inset 0 0 0 1px var(--line-2)}
+    .form-note:empty{display:none}
+
+    /* ---------- Footer ---------- */
+    .footer{position:relative;padding:60px 0 28px;border-top:1px solid var(--line-2);background:#FFFFFF}
+    .footer__top{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:32px}
+    .footer__brand{font-size:clamp(24px, 1vw + 18px, 32px);font-weight:600;letter-spacing:-.045em}
+    .footer__tag{margin-top:6px;color:var(--muted)}
+    .footer__soc{display:flex;flex-wrap:wrap;gap:4px 24px;font-size:15px;font-weight:600}
+    .footer__soc a{display:inline-flex;align-items:center;min-height:44px}
+    .footer__soc a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+    .footer__bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;margin-top:44px;padding-top:20px;border-top:1px solid var(--line)}
+    .footer__nav{display:flex;flex-wrap:wrap;gap:0 26px;font-size:15px;font-weight:500}
+    .footer__nav a{display:inline-flex;align-items:center;min-height:44px}
+    .footer__nav a:hover{color:var(--ink)}
+    .footer__nav a span{background-image:linear-gradient(var(--accent), var(--accent));background-repeat:no-repeat;background-position:0 86%;background-size:0% 7px;transition:background-size .4s var(--ease)}
+    .footer__nav a:hover span{background-size:100% 7px}
+    .footer__copy{font-size:14px;color:var(--muted)}
+
+    .to-top{position:fixed;right:16px;bottom:96px;z-index:50;display:flex;flex-direction:column;align-items:center;gap:10px;width:44px;padding:14px 0;border-radius:var(--r-pill);background:#FFFFFF;color:var(--ink);box-shadow:0 0 0 1px var(--line), 0 16px 30px -18px rgba(28,29,31,.45);font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .4s, transform .5s var(--ease), background-color .3s}
+    .to-top.is-visible{opacity:1;transform:none;pointer-events:auto}
+    .to-top:hover{color:var(--ink);background:var(--accent)}
+    .to-top__text{writing-mode:vertical-rl;transform:rotate(180deg)}
+    .to-top .ico{width:16px;height:16px}
+
+    /* ---------- Kaydırma animasyonları ---------- */
+    .js-motion .rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease), transform .9s var(--ease)}
+    .js-motion .is-in .rv{opacity:1;transform:none}
+    .js-motion .giant-rv{opacity:0;transform:translateX(10%);transition:opacity 1.2s var(--ease), transform 1.5s var(--ease)}
+    .js-motion .is-in .giant-rv{opacity:1;transform:none}
+    .rv.d1{transition-delay:.08s}
+    .rv.d2{transition-delay:.16s}
+    .rv.d3{transition-delay:.24s}
+    .rv.d4{transition-delay:.32s}
+    .rv.d5{transition-delay:.4s}
+    .rv.d6{transition-delay:.48s}
+
+    /* ---------- Duyarlı tasarım ---------- */
+    @@media (min-width:992px){
+      .pwrap.is-offset{margin-top:96px}
+    }
+    @@media (min-width:1200px){
+      .mmenu{display:none}
+    }
+    @@media (max-width:1199.98px){
+      .nav-links, .nav-cta{display:none}
+      .burger{display:block}
+      .sec-head, .contact__head{grid-template-columns:1fr}
+      .sec-head .sec-lead{justify-self:start}
+      .xp__grid, .edu__grid, .philo__grid{grid-template-columns:1fr}
+      .xp__aside{position:static}
+    }
+    @@media (max-width:991.98px){
+      .split{grid-template-columns:1fr}
+      .split__media{grid-column:auto;min-height:440px}
+      .split__body{grid-column:auto;padding:56px var(--gutter) 0}
+      .split__badge{right:var(--gutter);bottom:-60px}
+      .about__copy{margin-left:0}
+      .contact__grid{grid-template-columns:1fr}
+      .v-cue{display:none}
+    }
+    @@media (max-width:767.98px){
+      .v2{font-size:16px;background-size:calc(100% / 4) 100%}
+      .hero{min-height:auto;padding:120px 0 72px}
+      .hero__giant, .sunburst{top:40%}
+      .dot--2{width:36px;height:36px;right:8%}
+      .hero__labels{flex-direction:column;gap:10px;margin-top:48px}
+      .hero__actions .btn-pill{width:100%;justify-content:space-between}
+      .rbadge{width:116px;height:116px}
+      .rbadge::before{inset:28px}
+      .rbadge__core{width:48px;height:48px;font-size:17px}
+      .skill{padding:24px}
+      .skill__num{font-size:68px}
+      .xp-row{grid-template-columns:44px minmax(0,1fr);gap:0 18px}
+      .xp-row .date{grid-column:2;margin-top:14px;justify-self:start}
+      .edu-row{grid-template-columns:1fr}
+      .edu-row__when{flex-direction:row;flex-wrap:wrap;align-items:center}
+      .together{margin-inline:-14vw}
+      .together .giant{font-size:22vw}
+      .together .rbadge{top:-60%}
+      .contact__head{margin-top:56px}
+      .stat + .stat{padding-left:12px}
+      .footer__bottom{flex-direction:column;align-items:flex-start}
+      .to-top{right:10px;bottom:24px}
+    }
+    @@media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .js-motion .rv, .js-motion .giant-rv{opacity:1;transform:none;transition:none}
+      .sunburst::before, .rbadge__ring, .dot, .caret, .v-cue__line::after, .pcard{animation:none}
+      .v2 *{transition-duration:.01ms !important}
+    }
+  </style>
+</head>
+<body>
+
+<div class="v2">
+
+  <!-- ================= NAVİGASYON ================= -->
+  <header class="site-nav" data-site-nav>
+    <div class="wrap site-nav__inner">
+      <a class="brand" href="#home" aria-label="Göktuğ Talha Coşkunsoy, Ana Sayfa">
+        <span class="brand__mark" aria-hidden="true">GTC</span>
+        <span>Göktuğ Talha Coşkunsoy</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Ana menü">
+        <a class="nav-link-x is-active" href="#home" data-nav="home" aria-current="true"><span>Ana Sayfa</span></a>
+        <a class="nav-link-x" href="#about" data-nav="about"><span>Hakkımda</span></a>
+        <a class="nav-link-x" href="#skills" data-nav="skills"><span>Yeteneklerim</span></a>
+        <a class="nav-link-x" href="#experience" data-nav="experience"><span>Deneyimlerim</span></a>
+        <a class="nav-link-x" href="#projects" data-nav="projects"><span>Projelerim</span></a>
+        <a class="nav-link-x" href="#education" data-nav="education"><span>Eğitim</span></a>
+        <a class="nav-link-x" href="#contact" data-nav="contact"><span>İletişim</span></a>
+      </nav>
+
+      <div class="nav-right">
+        <a class="btn-pill btn-pill--sm nav-cta" href="#contact">Birlikte Çalışalım
+          <span class="btn-pill__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <button class="burger" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Menüyü aç" data-menu-toggle>
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobil menü -->
+  <div id="mobile-menu" class="mmenu" data-menu>
+    <nav aria-label="Mobil menü">
+      <ul class="mmenu__list">
+        <li><a class="mmenu__link is-active" href="#home" data-nav="home"><small>01</small>Ana Sayfa</a></li>
+        <li><a class="mmenu__link" href="#about" data-nav="about"><small>02</small>Hakkımda</a></li>
+        <li><a class="mmenu__link" href="#skills" data-nav="skills"><small>03</small>Yeteneklerim</a></li>
+        <li><a class="mmenu__link" href="#experience" data-nav="experience"><small>04</small>Deneyimlerim</a></li>
+        <li><a class="mmenu__link" href="#projects" data-nav="projects"><small>05</small>Projelerim</a></li>
+        <li><a class="mmenu__link" href="#education" data-nav="education"><small>06</small>Eğitim</a></li>
+        <li><a class="mmenu__link" href="#contact" data-nav="contact"><small>07</small>İletişim</a></li>
+      </ul>
+    </nav>
+    <div class="mmenu__foot">
+      <a href="mailto:example@mail.com">example@mail.com</a>
+      <div class="mmenu__soc">
+        <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">Gh.</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">Li.</a>        <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">Ig.</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ================= HERO ================= -->
+    <section id="home" class="hero" aria-labelledby="hero-title">
+      <div class="hero__giant" aria-hidden="true"><span class="giant giant-rv">yazılım</span></div>
+      <div class="sunburst" aria-hidden="true"></div>
+      <span class="dot dot--1" aria-hidden="true"></span>
+      <span class="dot dot--2" aria-hidden="true"></span>
+      <span class="dot dot--3" aria-hidden="true"></span>
+      <span class="dot dot--4" aria-hidden="true"></span>
+
+      <div class="hero__content">
+        <p class="eyebrow rv">-MERHABA, BEN GÖKTUĞ</p>
+        <h1 id="hero-title" class="hero__title rv d1">Fikirleri Dijital Deneyimlere Dönüştürüyorum.</h1>
+        <p class="visually-hidden">Bilgisayar Mühendisi, .NET Backend Developer, Yazılım Geliştiricisi, Yazılım Mimarı, Yapay Zeka Meraklısı</p>
+        <div class="typing rv d2" aria-hidden="true"><span class="typing__text" data-typing>Bilgisayar Mühendisi</span><span class="caret"></span></div>
+        <p class="hero__text rv d3">Modern yazılım teknolojileriyle yenilikçi çözümler geliştiriyor, bilgi ve deneyimlerimi paylaşarak teknoloji dünyasına değer katmayı amaçlıyorum.</p>
+        <div class="hero__actions rv d4">
+          <a class="btn-pill" href="#projects">Projelerimi Keşfet
+            <span class="btn-pill__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+          <a class="cta-link" href="#contact">Benimle İletişime Geç</a>
+        </div>
+        <div class="socials rv d5">
+          <a class="social-link" href="https://github.com/" target="_blank" rel="noopener">GitHub <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+          <a class="social-link" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>          <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        </div>
+      </div>
+
+      <ul class="hero__labels rv d6">
+        <li class="hl"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg>Yazılım Geliştiricisi</li>        <li class="hl"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Bursa, Türkiye</li>        <li class="hl"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>Bilgisayar Mühendisi</li>
+      </ul>
+
+      <a class="v-cue" href="#about"><span class="v-cue__text">Aşağı Kaydır</span><span class="v-cue__line" aria-hidden="true"></span></a>
+    </section>
+
+    <!-- ================= HAKKIMDA ================= -->
+    <section id="about" class="about" aria-labelledby="about-title">
+      <div class="split">
+        <div class="split__media rv">
+          <!-- Gerçek fotoğraf için: <img class="ph-img" src="~/img/hakkimda.jpg" alt="Göktuğ Talha Coşkunsoy çalışma ortamında" width="1600" height="1400" loading="lazy"> -->
+          <div class="ph" role="img" aria-label="Göktuğ Talha Coşkunsoy portre fotoğrafı, siyah beyaz (yer tutucu)">
+            <span class="ph__head"></span><span class="ph__body"></span>
+            <span class="ph__label">Portre · siyah beyaz · 1600×1400</span>
+          </div>
+          <div class="split__badge rbadge" aria-hidden="true">
+            <svg class="rbadge__ring" viewBox="0 0 160 160"><defs><path id="rb-about" d="M80,80 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0"/></defs><text><textPath href="#rb-about" textLength="385" lengthAdjust="spacing">BİLGİSAYAR MÜHENDİSİ • .NET BACKEND • </textPath></text></svg>
+            <span class="rbadge__core"><svg class="ico" viewBox="0 0 24 24"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg></span>
+          </div>
+        </div>
+
+        <div class="split__body">
+          <p class="eyebrow rv">-BENİ TANIYIN</p>
+          <h2 id="about-title" class="sec-title rv d1">Teknolojiye Tutkuyla Bağlı Bir Yolculuk.</h2>
+          <div class="about__copy">
+            <p class="about__intro rv d2">Merhaba, ben Göktuğ Talha Coşkunsoy. Yazılım geliştirme, yazılım eğitimi ve modern teknolojiler üzerine çalışan bir yazılım geliştiricisiyim. Özellikle .NET ekosistemi, yazılım mimarileri ve yapay zeka destekli uygulamalar geliştirme alanlarında çalışmalar yürütüyorum.</p>
+            <p class="about__text rv d3">Teknolojinin yalnızca kod yazmaktan ibaret olmadığına; aynı zamanda problem çözmek, değer üretmek ve bilgiyi paylaşmak olduğuna inanıyorum. Geliştirdiğim projeler ve hazırladığım eğitimlerle yazılım dünyasına katkı sağlamayı hedefliyorum.</p>            <div class="about__cta rv d5">
+              <!-- Özgeçmiş PDF dosyasını wwwroot/files/ozgecmis.pdf konumuna ekleyin -->
+              <a class="cta-link" href="files/ozgecmis.pdf" target="_blank" rel="noopener">Özgeçmişimi İncele <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= YETENEKLER ================= -->
+    <section id="skills" class="section section--soft" aria-labelledby="skills-title">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <p class="eyebrow rv">-TEKNOLOJİ YIĞINIM</p>
+            <h2 id="skills-title" class="sec-title sec-title--narrow rv d1">Kullandığım Teknolojiler ve Uzmanlık Alanlarım</h2>
+          </div>
+          <p class="sec-lead rv d2">Bir fikrin hayata geçirilmesinden ölçeklenebilir bir yazılım ürününe dönüşmesine kadar farklı teknolojilerle çalışıyorum.</p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-12 col-md-6 col-xl-4 rv d1">
+            <article class="skill">
+              <div class="skill__head"><span class="skill__num" aria-hidden="true">01</span><span class="skill__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></span></div>
+              <h3 class="skill__title">Backend Geliştirme</h3>
+              <ul class="tags"><li class="tag">C#</li><li class="tag">ASP.NET Core</li><li class="tag">Web API</li><li class="tag">Entity Framework Core</li><li class="tag">Dapper</li><li class="tag">LINQ</li></ul>
+            </article>
+          </div>
+          <div class="col-12 col-md-6 col-xl-4 rv d2">
+            <article class="skill">
+              <div class="skill__head"><span class="skill__num" aria-hidden="true">02</span><span class="skill__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></span></div>
+              <h3 class="skill__title">Frontend Teknolojileri</h3>
+              <ul class="tags"><li class="tag">HTML5</li><li class="tag">CSS3</li><li class="tag">Bootstrap</li><li class="tag">JavaScript</li><li class="tag">Responsive Web Design</li></ul>
+            </article>
+          </div>
+          <div class="col-12 col-md-6 col-xl-4 rv d3">
+            <article class="skill">
+              <div class="skill__head"><span class="skill__num" aria-hidden="true">03</span><span class="skill__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span></div>
+              <h3 class="skill__title">Veritabanı Teknolojileri</h3>
+              <ul class="tags"><li class="tag">Microsoft SQL Server</li><li class="tag">PostgreSQL</li><li class="tag">MongoDB</li><li class="tag">Redis</li></ul>
+            </article>
+          </div>
+          <div class="col-12 col-md-6 col-xl-4 rv d1">
+            <article class="skill">
+              <div class="skill__head"><span class="skill__num" aria-hidden="true">04</span><span class="skill__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></span></div>
+              <h3 class="skill__title">Yazılım Mimarileri</h3>
+              <ul class="tags"><li class="tag">Clean Architecture</li><li class="tag">Onion Architecture</li><li class="tag">Microservices</li><li class="tag">CQRS</li><li class="tag">Repository Pattern</li><li class="tag">SOLID Principles</li></ul>
+            </article>
+          </div>
+          <div class="col-12 col-md-6 col-xl-4 rv d2">
+            <article class="skill">
+              <div class="skill__head"><span class="skill__num" aria-hidden="true">05</span><span class="skill__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></span></div>
+              <h3 class="skill__title">Yapay Zeka ve Entegrasyonlar</h3>
+              <ul class="tags"><li class="tag">OpenAI API</li><li class="tag">Google Gemini</li><li class="tag">Claude AI</li><li class="tag">Prompt Engineering</li><li class="tag">AI Agents</li><li class="tag">REST API Integrations</li></ul>
+            </article>
+          </div>
+          <div class="col-12 col-md-6 col-xl-4 rv d3">
+            <article class="skill">
+              <div class="skill__head"><span class="skill__num" aria-hidden="true">06</span><span class="skill__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4 2.6-2.6z"/></svg></span></div>
+              <h3 class="skill__title">Araçlar ve Geliştirme Süreçleri</h3>
+              <ul class="tags"><li class="tag">Git &amp; GitHub</li><li class="tag">Docker</li><li class="tag">Postman</li><li class="tag">Visual Studio</li><li class="tag">Agile / Scrum</li><li class="tag">CI/CD</li></ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DENEYİM ================= -->
+    <section id="experience" class="section" aria-labelledby="exp-title">
+      <div class="wrap xp__grid">
+        <div class="xp__aside">
+          <p class="eyebrow rv">-KARİYER YOLCULUĞUM</p>
+          <h2 id="exp-title" class="sec-title rv d1">Deneyimlerim ve Profesyonel Yolculuğum</h2>
+        </div>
+
+        <ol class="xp-list">
+          <li class="xp-row rv d1">
+            <span class="xp-row__idx">01</span>
+            <div>
+              <h3 class="xp-row__title">Yazılım Eğitmeni ve Kurucu</h3>
+              <p class="xp-org">M&amp;Y Yazılım Eğitim Akademi</p>
+              <p class="xp-row__desc">Yazılım geliştirme alanında uygulamalı eğitim programları, proje tabanlı bootcamp süreçleri ve kariyer odaklı teknoloji eğitimleri.</p>
+            </div>
+            <span class="date">[Başlangıç] - [Bitiş]</span>
+          </li>
+          <li class="xp-row rv d2">
+            <span class="xp-row__idx">02</span>
+            <div>
+              <h3 class="xp-row__title">Yazılım Test Mühendisi</h3>
+              <p class="xp-org">Yapı Kredi</p>
+              <p class="xp-row__desc">Kurumsal bankacılık uygulamalarında yazılım test süreçleri, test otomasyonu, kalite güvence ve çevik geliştirme metodolojileri.</p>
+            </div>
+            <span class="date">[Başlangıç] - [Bitiş]</span>
+          </li>
+          <li class="xp-row rv d3">
+            <span class="xp-row__idx">03</span>
+            <div>
+              <h3 class="xp-row__title">Teknoloji İçerik Üreticisi</h3>
+              <p class="xp-org">YouTube ve Udemy</p>
+              <p class="xp-row__desc">.NET teknolojileri, yazılım geliştirme ve modern uygulama mimarileri üzerine kapsamlı eğitim içeriklerinin hazırlanması.</p>
+            </div>
+            <span class="date">[Başlangıç] - [Bitiş]</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= PROJELER ================= -->
+    <section id="projects" class="projects" aria-labelledby="projects-title">
+      <div class="giant-row" aria-hidden="true">
+        <span class="giant giant-rv">projeler</span>
+        <div class="rbadge rbadge--dark">
+          <svg class="rbadge__ring" viewBox="0 0 160 160"><defs><path id="rb-proj" d="M80,80 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0"/></defs><text><textPath href="#rb-proj" textLength="385" lengthAdjust="spacing">SEÇİLMİŞ ÇALIŞMALAR • FİKİRDEN ÜRÜNE • </textPath></text></svg>
+          <span class="rbadge__core"><svg class="ico" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="sec-head projects__head">
+          <div>
+            <p class="eyebrow rv">-SEÇİLMİŞ ÇALIŞMALAR</p>
+            <h2 id="projects-title" class="sec-title rv d1">Fikirden Ürüne Dönüşen Projeler</h2>
+          </div>
+          <p class="sec-lead rv d2">Öğrenme, üretme ve problem çözme süreçlerimin birer yansıması olan projelerimden bazıları.</p>
+        </div>
+
+        <div class="filters rv d2" role="group" aria-label="Projeleri kategoriye göre filtrele">
+          <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">Tümü</button>
+          <button class="filter" type="button" data-filter="web" aria-pressed="false">Web Uygulamaları</button>
+          <button class="filter" type="button" data-filter="ai" aria-pressed="false">Yapay Zeka</button>
+          <button class="filter" type="button" data-filter="mobile" aria-pressed="false">Mobil</button>
+          <button class="filter" type="button" data-filter="micro" aria-pressed="false">Mikroservisler</button>
+        </div>
+        <p class="visually-hidden" aria-live="polite" data-filter-status></p>
+
+        <div class="row gx-4 gy-5 align-items-start">
+
+          <div class="col-12 col-md-6 pwrap rv d1" data-cats="web ai">
+            <article class="pcard">
+              <a class="pthumb" href="#projects" aria-label="Yapay Zeka Destekli Seyahat Asistanı projesini incele">
+                <div class="pthumb__inner" aria-hidden="true">
+                  <div class="mock">
+                    <div class="mock__bar"><span></span><span></span><span></span></div>
+                    <div class="mock__body">
+                      <div class="bubbles"><span class="bubble"></span><span class="bubble bubble--out"></span><span class="bubble bubble--short"></span><span class="bubble bubble--out bubble--short"></span></div>
+                      <div class="mini-map"><svg viewBox="0 0 120 90" preserveAspectRatio="none"><path d="M14 74 C 44 70, 40 26, 70 30 S 100 40, 106 14"/></svg><span class="pin pin--a"></span><span class="pin pin--b"></span></div>
+                    </div>
+                  </div>
+                </div>
+                <span class="pthumb__idx" aria-hidden="true">01</span>
+                <span class="pthumb__go" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+              </a>
+              <div class="pcap"><h3 class="pcap__title">Yapay Zeka Destekli Seyahat Asistanı</h3><span class="pcap__cat">Yapay Zeka, Web</span></div>
+              <p class="pdesc">Yapay zeka servisleri ve gerçek zamanlı veri entegrasyonlarıyla kişiselleştirilmiş seyahat önerileri sunan uygulama.</p>
+              <div class="pfoot">
+                <ul class="tags" aria-label="Kullanılan teknolojiler"><li class="tag">ASP.NET Core</li><li class="tag">Web API</li><li class="tag">OpenAI</li><li class="tag">SQL Server</li></ul>
+                <a class="cta-link" href="#projects">Projeyi İncele</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-12 col-md-6 pwrap is-offset rv d2" data-cats="web micro">
+            <article class="pcard">
+              <a class="pthumb" href="#projects" aria-label="Mikroservis E-Ticaret Platformu projesini incele">
+                <div class="pthumb__inner" aria-hidden="true">
+                  <div class="nodes">
+                    <svg viewBox="0 0 160 100" preserveAspectRatio="none"><path d="M80 50 L27 20 M80 50 L133 20 M80 50 L27 80 M80 50 L133 80"/></svg>
+                    <span class="node node--1">katalog</span>
+                    <span class="node node--2">sepet</span>
+                    <span class="node node--3">sipariş</span>
+                    <span class="node node--4">ödeme</span>
+                    <span class="node node--hub">API Gateway</span>
+                  </div>
+                </div>
+                <span class="pthumb__idx" aria-hidden="true">02</span>
+                <span class="pthumb__go" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+              </a>
+              <div class="pcap"><h3 class="pcap__title">Mikroservis E-Ticaret Platformu</h3><span class="pcap__cat">Mikroservis, Web</span></div>
+              <p class="pdesc">Bağımsız servisler, dağıtık sistem bileşenleri ve modern backend teknolojileriyle geliştirilen e-ticaret altyapısı.</p>
+              <div class="pfoot">
+                <ul class="tags" aria-label="Kullanılan teknolojiler"><li class="tag">.NET</li><li class="tag">Microservices</li><li class="tag">Docker</li><li class="tag">Redis</li></ul>
+                <a class="cta-link" href="#projects">Projeyi İncele</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-12 col-md-6 pwrap rv d1" data-cats="web ai">
+            <article class="pcard">
+              <a class="pthumb" href="#projects" aria-label="Akıllı Satış Analiz Platformu projesini incele">
+                <div class="pthumb__inner" aria-hidden="true">
+                  <div class="mock">
+                    <div class="mock__bar"><span></span><span></span><span></span></div>
+                    <div class="chart">
+                      <div class="kpis"><span></span><span></span><span></span></div>
+                      <div class="bars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                    </div>
+                  </div>
+                </div>
+                <span class="pthumb__idx" aria-hidden="true">03</span>
+                <span class="pthumb__go" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+              </a>
+              <div class="pcap"><h3 class="pcap__title">Akıllı Satış Analiz Platformu</h3><span class="pcap__cat">Yapay Zeka, Veri</span></div>
+              <p class="pdesc">Veri analizi ve makine öğrenmesi teknikleriyle satış eğilimlerini analiz eden ve tahminler üreten yönetim platformu.</p>
+              <div class="pfoot">
+                <ul class="tags" aria-label="Kullanılan teknolojiler"><li class="tag">ASP.NET Core</li><li class="tag">ML.NET</li><li class="tag">SQL Server</li></ul>
+                <a class="cta-link" href="#projects">Projeyi İncele</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-12 col-md-6 pwrap is-offset rv d2" data-cats="mobile">
+            <article class="pcard">
+              <a class="pthumb" href="#projects" aria-label="Mobil Seyahat Rezervasyon Uygulaması projesini incele">
+                <div class="pthumb__inner" aria-hidden="true">
+                  <div class="phones">
+                    <div class="phone phone--back"><div class="phone__screen"><span class="phone__hero phone__hero--alt"></span><span class="phone__row"></span><span class="phone__row phone__row--short"></span></div></div>
+                    <div class="phone"><div class="phone__screen"><span class="phone__hero"></span><span class="phone__row"></span><span class="phone__row phone__row--short"></span><span class="phone__row"></span><span class="phone__btn"></span></div></div>
+                  </div>
+                </div>
+                <span class="pthumb__idx" aria-hidden="true">04</span>
+                <span class="pthumb__go" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+              </a>
+              <div class="pcap"><h3 class="pcap__title">Mobil Seyahat Rezervasyon Uygulaması</h3><span class="pcap__cat">Mobil</span></div>
+              <p class="pdesc">Modern mobil arayüzler ve dinamik rezervasyon süreçleriyle oluşturulan kullanıcı odaklı seyahat uygulaması.</p>
+              <div class="pfoot">
+                <ul class="tags" aria-label="Kullanılan teknolojiler"><li class="tag">.NET MAUI</li><li class="tag">C#</li><li class="tag">SQLite</li></ul>
+                <a class="cta-link" href="#projects">Projeyi İncele</a>
+              </div>
+            </article>
+          </div>
+
+        </div>
+
+        <div class="projects-more rv">
+          <a class="btn-pill" href="https://github.com/" target="_blank" rel="noopener">Tüm Projelerimi Gör
+            <span class="btn-pill__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EĞİTİM ================= -->
+    <section id="education" class="section section--edu" aria-labelledby="edu-title">
+      <div class="wrap edu__grid">
+        <div>
+          <p class="eyebrow rv">-AKADEMİK YOLCULUK</p>
+          <h2 id="edu-title" class="sec-title rv d1">Eğitim Hayatım</h2>
+          <figure class="edu-quote rv d2">
+            <span class="edu-quote__mark" aria-hidden="true">“</span>
+            <blockquote class="edu-quote__text">Öğrenmek bir varış noktası değil, <span class="ul">sürekli devam eden bir yolculuktur.</span></blockquote>
+            <figcaption class="edu-quote__note">Yazılım geliştirmek, teknik araştırma yapmak ve öğrendiklerimi paylaşmak benim için birbirini besleyen tek bir döngü. Her yeni proje yeni bir öğrenme fırsatı; her öğrendiğim konu ise paylaşılmayı bekleyen bir içerik.</figcaption>
+            <ul class="tags learn-tags" aria-label="Öğrenme alanları"><li class="tag">Sürekli öğrenme</li><li class="tag">Yazılım geliştirme</li><li class="tag">Teknik araştırma</li><li class="tag">Bilgi paylaşımı</li></ul>
+          </figure>
+        </div>
+
+        <ol class="edu-list">
+          <li class="edu-row rv d1">
+            <div class="edu-row__when">
+              <span class="edu-level">Lisans</span>
+              <span class="date">[Başlangıç] - [Bitiş]</span>
+            </div>
+            <div>
+              <h3 class="edu-title">Bilgisayar Mühendisliği</h3>
+              <p class="edu-inst">Üsküdar Üniversitesi</p>
+              <p class="edu-desc">Yapay zeka ajanları, büyük dil modelleri ve akıllı sistemler üzerine akademik çalışmalar.</p>
+            </div>
+          </li>
+          <li class="edu-row rv d2">
+            <div class="edu-row__when">
+              <span class="edu-level">Ön Lisans</span>
+              <span class="date">[Başlangıç] - [Bitiş]</span>
+            </div>
+            <div>
+              <h3 class="edu-title">Bilgisayar Programcılığı</h3>
+              <p class="edu-inst">Uludağ Üniversitesi</p>
+              <p class="edu-desc"><span class="ph-text">[Kısa açıklama ekleyin]</span></p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= FELSEFE ================= -->
+    <section id="philosophy" class="philo" aria-label="Yazılım felsefem">
+      <div class="wrap philo__grid">
+        <div class="rv">
+          <span class="philo__mark" aria-hidden="true">“</span>
+          <p class="philo__tag">Yazılım felsefem</p>
+        </div>
+        <figure>
+          <blockquote class="philo__quote rv d1">İyi yazılım yalnızca çalışan kod değil, <span class="ul">gerçek bir probleme</span> üretilmiş anlamlı bir çözümdür.</blockquote>
+          <figcaption class="philo__sign rv d2">&#64;Göktuğ Talha Coşkunsoy</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= İLETİŞİM ================= -->
+    <section id="contact" class="contact" aria-labelledby="contact-title">
+      <div class="together" aria-hidden="true">
+        <span class="giant together__ink giant-rv">birlikte</span>
+        <span class="giant giant-rv">çalışalım</span>
+        <div class="rbadge">
+          <svg class="rbadge__ring" viewBox="0 0 160 160"><defs><path id="rb-contact" d="M80,80 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0"/></defs><text><textPath href="#rb-contact" textLength="385" lengthAdjust="spacing">BİRLİKTE ÇALIŞALIM • BURSA, TÜRKİYE •</textPath></text></svg>
+          <span class="rbadge__core"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="contact__head">
+          <div>
+            <p class="eyebrow rv">-İLETİŞİME GEÇELİM</p>
+            <h2 id="contact-title" class="contact__title rv d1">Harika Bir Fikrin mi Var? <strong class="ul">Birlikte Hayata Geçirelim.</strong></h2>
+          </div>
+          <p class="sec-lead rv d2">Yeni projeler, eğitimler, iş birlikleri veya yalnızca teknoloji üzerine sohbet etmek için benimle iletişime geçebilirsin.</p>
+        </div>
+
+        <div class="contact__grid">
+          <div class="rv d2">
+            <ul class="c-list">
+              <li class="c-item">
+                <span class="c-item__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+                <span><span class="c-item__label">E-posta</span><a class="c-item__value" href="mailto:example@mail.com">example@mail.com</a></span>
+              </li>
+              <li class="c-item">
+                <span class="c-item__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+                <span><span class="c-item__label">Konum</span><span class="c-item__value">Bursa, Türkiye</span></span>
+              </li>
+            </ul>
+            <p class="soc-title">Sosyal medya</p>
+            <div class="soc-row">
+              <a class="soc" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">Li.</a>
+              <a class="soc" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">Gh.</a>              <a class="soc" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">Ig.</a>
+            </div>
+          </div>
+
+          <div class="form-card rv d3">
+            <h3 class="form-card__title">Bana bir mesaj bırak</h3>
+            <p class="form-card__sub">Genellikle birkaç iş günü içinde dönüş yapıyorum.</p>
+
+            <!-- Backend hazır olduğunda data-backend-ready="true" yapın; form /Home/Contact adresine POST edilir.
+                 Razor görünümünde form içine AntiForgeryToken eklemeyi unutmayın. -->
+            <form id="contact-form" action="/Home/Contact" method="post" novalidate data-backend-ready="false" aria-describedby="privacy-note">
+              <div class="row g-3">
+                <div class="col-12 col-md-6 field">
+                  <label for="cf-name">Adınız Soyadınız <span class="req" aria-hidden="true">*</span></label>
+                  <input class="input" id="cf-name" name="name" type="text" autocomplete="name" required maxlength="100" placeholder="Örn. Ayşe Yılmaz" aria-invalid="false" aria-describedby="cf-name-err">
+                  <p class="field-error" id="cf-name-err"></p>
+                </div>
+                <div class="col-12 col-md-6 field">
+                  <label for="cf-email">E-posta Adresiniz <span class="req" aria-hidden="true">*</span></label>
+                  <input class="input" id="cf-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="150" placeholder="ornek@alanadi.com" aria-invalid="false" aria-describedby="cf-email-err">
+                  <p class="field-error" id="cf-email-err"></p>
+                </div>
+                <div class="col-12 field">
+                  <label for="cf-subject">Konu <span class="req" aria-hidden="true">*</span></label>
+                  <input class="input" id="cf-subject" name="subject" type="text" required maxlength="150" placeholder="Proje, eğitim, iş birliği…" aria-invalid="false" aria-describedby="cf-subject-err">
+                  <p class="field-error" id="cf-subject-err"></p>
+                </div>
+                <div class="col-12 field">
+                  <label for="cf-message">Mesajınız <span class="req" aria-hidden="true">*</span></label>
+                  <textarea class="input" id="cf-message" name="message" rows="5" required maxlength="4000" placeholder="Fikrinden biraz bahset…" aria-invalid="false" aria-describedby="cf-message-err"></textarea>
+                  <p class="field-error" id="cf-message-err"></p>
+                </div>
+              </div>
+              <div class="form-foot">
+                <button class="btn-pill btn-pill--block" type="submit">Mesajımı Gönder
+                  <span class="btn-pill__icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                </button>
+                <p class="privacy" id="privacy-note"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Bu formu göndererek paylaştığın bilgilerin yalnızca mesajına yanıt vermek amacıyla kullanılmasını kabul etmiş olursun. Bilgilerin üçüncü kişilerle paylaşılmaz.</span></p>
+                <p class="form-note" role="status" aria-live="polite" data-form-note></p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer id="site-footer" class="footer">
+    <div class="wrap">
+      <div class="footer__top rv">
+        <div>
+          <p class="footer__brand">Göktuğ Talha Coşkunsoy</p>
+          <p class="footer__tag">Kod, yaratıcılık ve sürekli öğrenme.</p>
+        </div>
+        <div class="footer__soc">
+          <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>          <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <nav class="footer__nav" aria-label="Alt menü">
+          <a href="#home"><span>Ana Sayfa</span></a>
+          <a href="#about"><span>Hakkımda</span></a>
+          <a href="#projects"><span>Projelerim</span></a>
+          <a href="#contact"><span>İletişim</span></a>
+        </nav>
+        <p class="footer__copy">© 2026 Göktuğ Talha Coşkunsoy. Tüm hakları saklıdır.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a class="to-top" href="#home" aria-label="Sayfanın başına dön" tabindex="-1" aria-hidden="true" data-to-top>
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+    <span class="to-top__text">Yukarı Dön</span>
+  </a>
+
+</div>
+
+<!-- ===================================================================
+     JAVASCRIPT (MVC'de: wwwroot/js/site.js dosyasına taşıyın)
+     =================================================================== -->
+<script>
+(function () {
+  'use strict';
+
+  var doc = document;
+  var html = doc.documentElement;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- 1. Daktilo efekti ---------- */
+  var typingEl = doc.querySelector('[data-typing]');
+  if (typingEl) {
+    var phrases = ['Bilgisayar Mühendisi', '.NET Backend Developer', 'Yazılım Geliştiricisi', 'Yazılım Mimarı', 'Yapay Zeka Meraklısı'];
+    var pi = 0;
+    var ci = phrases[0].length;
+    var deleting = true;
+
+    var tick = function () {
+      if (reduce) {
+        pi = (pi + 1) % phrases.length;
+        typingEl.textContent = phrases[pi];
+        setTimeout(tick, 2600);
+        return;
+      }
+      var word = phrases[pi];
+      if (!deleting) {
+        ci += 1;
+        typingEl.textContent = word.slice(0, ci);
+        if (ci >= word.length) { deleting = true; setTimeout(tick, 1700); return; }
+        setTimeout(tick, 70 + Math.random() * 45);
+      } else {
+        ci -= 1;
+        typingEl.textContent = word.slice(0, Math.max(ci, 0));
+        if (ci <= 0) { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(tick, 380); return; }
+        setTimeout(tick, 36);
+      }
+    };
+    setTimeout(tick, 1800);
+  }
+
+  /* ---------- 2. Navbar arka planı ve yukarı dön butonu ---------- */
+  var nav = doc.querySelector('[data-site-nav]');
+  var toTop = doc.querySelector('[data-to-top]');
+  var ticking = false;
+
+  var onScroll = function () {
+    var y = window.scrollY || html.scrollTop || 0;
+    nav.classList.toggle('is-scrolled', y > 24);
+    var show = y > 720;
+    toTop.classList.toggle('is-visible', show);
+    toTop.setAttribute('tabindex', show ? '0' : '-1');
+    toTop.setAttribute('aria-hidden', show ? 'false' : 'true');
+    ticking = false;
+  };
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
+
+  /* ---------- 3. Mobil menü ---------- */
+  var menu = doc.querySelector('[data-menu]');
+  var burger = doc.querySelector('[data-menu-toggle]');
+
+  var setMenu = function (open) {
+    menu.classList.toggle('is-open', open);
+    burger.classList.toggle('is-open', open);
+    nav.classList.toggle('is-menu-open', open);
+    html.classList.toggle('menu-locked', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Menüyü kapat' : 'Menüyü aç');
+  };
+  var isMenuOpen = function () { return menu.classList.contains('is-open'); };
+
+  burger.addEventListener('click', function () { setMenu(!isMenuOpen()); });
+  menu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () { setMenu(false); });
+  });
+  doc.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && isMenuOpen()) { setMenu(false); burger.focus(); }
+  });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth >= 1200 && isMenuOpen()) setMenu(false);
+  });
+
+  /* ---------- 4. Aktif menü bağlantısı ---------- */
+  var navLinks = doc.querySelectorAll('[data-nav]');
+  var setActive = function (id) {
+    navLinks.forEach(function (a) {
+      var on = a.getAttribute('data-nav') === id;
+      a.classList.toggle('is-active', on);
+      if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    });
+  };
+  navLinks.forEach(function (a) {
+    a.addEventListener('click', function () { setActive(a.getAttribute('data-nav')); });
+  });
+
+  /* ---------- 5. Kaydırma animasyonları ve aktif bölüm takibi ---------- */
+  var sectionIds = ['home', 'about', 'skills', 'experience', 'projects', 'education', 'philosophy', 'contact', 'site-footer'];
+  var sectionMap = { philosophy: 'education', 'site-footer': 'contact' };
+  var sections = sectionIds.map(function (id) { return doc.getElementById(id); }).filter(Boolean);
+
+  if ('IntersectionObserver' in window) {
+    var activeObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) setActive(sectionMap[en.target.id] || en.target.id);
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sections.forEach(function (s) { activeObserver.observe(s); });
+
+    if (html.classList.contains('js-motion')) {
+      var revealObserver = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('is-in'); obs.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+      sections.forEach(function (s) { revealObserver.observe(s); });
+    }
+  }
+
+  /* ---------- 6. Proje filtreleri ---------- */
+  var filterButtons = doc.querySelectorAll('[data-filter]');
+  var projectCards = doc.querySelectorAll('[data-cats]');
+  var filterStatus = doc.querySelector('[data-filter-status]');
+
+  var applyFilter = function (filter, announce) {
+    var shown = 0;
+    projectCards.forEach(function (card) {
+      var cats = card.getAttribute('data-cats').split(' ');
+      var visible = filter === 'all' || cats.indexOf(filter) > -1;
+      card.classList.toggle('is-hidden', !visible);
+      card.classList.remove('is-offset');
+      if (visible) {
+        if (shown % 2 === 1) card.classList.add('is-offset');
+        shown += 1;
+      }
+    });
+    filterButtons.forEach(function (btn) {
+      var on = btn.getAttribute('data-filter') === filter;
+      btn.classList.toggle('is-active', on);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    if (announce && filterStatus) filterStatus.textContent = shown + ' proje gösteriliyor';
+  };
+  filterButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () { applyFilter(btn.getAttribute('data-filter'), true); });
+  });
+
+  /* ---------- 7. İletişim formu doğrulama ---------- */
+  var form = doc.getElementById('contact-form');
+  if (form) {
+    var note = form.querySelector('[data-form-note]');
+    var backendReady = form.getAttribute('data-backend-ready') === 'true';
+    var emailPattern = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]{2,}$/;
+
+    var setError = function (name, message) {
+      var input = form.elements[name];
+      var err = doc.getElementById(input.id + '-err');
+      input.setAttribute('aria-invalid', message ? 'true' : 'false');
+      if (err) err.textContent = message || '';
+    };
+
+    var validate = function () {
+      var get = function (n) { return (form.elements[n].value || '').trim(); };
+      var v = { name: get('name'), email: get('email'), subject: get('subject'), message: get('message') };
+      var errors = {};
+      if (!v.name) errors.name = 'Lütfen adınızı ve soyadınızı yazın.';
+      else if (v.name.length < 3) errors.name = 'Ad soyad en az 3 karakter olmalı.';
+      if (!v.email) errors.email = 'Lütfen e-posta adresinizi yazın.';
+      else if (!emailPattern.test(v.email)) errors.email = 'Geçerli bir e-posta adresi girin (ör. ad@alanadi.com).';
+      if (!v.subject) errors.subject = 'Lütfen bir konu belirtin.';
+      if (!v.message) errors.message = 'Lütfen mesajınızı yazın.';
+      else if (v.message.length < 10) errors.message = 'Mesajınız en az 10 karakter olmalı.';
+      ['name', 'email', 'subject', 'message'].forEach(function (n) { setError(n, errors[n]); });
+      return errors;
+    };
+
+    form.addEventListener('submit', function (e) {
+      var errors = validate();
+      var keys = Object.keys(errors);
+      if (keys.length) {
+        e.preventDefault();
+        note.textContent = '';
+        form.elements[keys[0]].focus();
+        return;
+      }
+      if (!backendReady) {
+        // Statik sürüm: gönderim yapılmaz, başarı mesajı taklit edilmez.
+        e.preventDefault();
+        note.textContent = 'Bilgilerin eksiksiz görünüyor. Mesaj gönderimi henüz aktif değil; dilersen doğrudan example@mail.com adresine yazabilirsin.';
+      }
+      // backendReady === true ise form normal şekilde /Home/Contact adresine gönderilir.
+    });
+
+    form.addEventListener('input', function (e) {
+      var t = e.target;
+      if (t.name && t.getAttribute('aria-invalid') === 'true') setError(t.name, '');
+    });
+  }
+})();
+</script>
+</body>
+</html>
