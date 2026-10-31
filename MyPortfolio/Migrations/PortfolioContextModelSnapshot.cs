@@ -104,6 +104,10 @@ namespace MyPortfolio.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Years")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("EducationId");
 
                     b.ToTable("Educations");

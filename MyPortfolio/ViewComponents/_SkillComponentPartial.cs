@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyPortfolio.Context;
 
 namespace MyPortfolio.ViewComponents
@@ -8,7 +9,7 @@ namespace MyPortfolio.ViewComponents
         PortfolioContext PortfolioContext = new PortfolioContext();
         public IViewComponentResult Invoke()
         {
-            var values = PortfolioContext.Skills.ToList();
+            var values = PortfolioContext.Skills.Include(x => x.SkillItems).OrderBy(x => x.SkillOrder).ToList();
             return View(values);
         }
     }

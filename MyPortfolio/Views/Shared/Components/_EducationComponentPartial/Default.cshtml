@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
 } 
+@model List<MyPortfolio.Entities.Education>
 
  <section id="education" class="section section--edu" aria-labelledby="edu-title">
       <div class="wrap edu__grid">
@@ -16,28 +17,21 @@
         </div>
 
         <ol class="edu-list">
-          <li class="edu-row rv d1">
-            <div class="edu-row__when">
-              <span class="edu-level">Lisans</span>
-              <span class="date">2022 - 2026</span>
-            </div>
-            <div>
-              <h3 class="edu-title">Bilgisayar Mühendisliği</h3>
-              <p class="edu-inst">Üsküdar Üniversitesi</p>
-              <p class="edu-desc"> </p>
-            </div>
-          </li>
-          <li class="edu-row rv d2">
-            <div class="edu-row__when">
-              <span class="edu-level">Ön Lisans</span>
-              <span class="date">2019 - 2021</span>
-            </div>
-            <div>
-              <h3 class="edu-title">Bilgisayar Programcılığı</h3>
-              <p class="edu-inst">Uludağ Üniversitesi</p>
-              <p class="edu-desc"><span class="ph-text"> </span></p>
-            </div>
-          </li>
+          
+            @foreach (var item in Model)
+            {
+                <li class="edu-row rv d2">
+                    <div class="edu-row__when">
+                        <span class="edu-level">@item.Degree</span>
+                        <span class="date">@item.Years</span>
+                    </div>
+                    <div>
+                        <h3 class="edu-title">@item.Title</h3>
+                        <p class="edu-inst">@item.University</p>
+                        <p class="edu-desc">@item.Description</p>
+                    </div>
+                </li>
+            }
         </ol>
       </div>
     </section>

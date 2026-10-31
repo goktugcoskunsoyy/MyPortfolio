@@ -363,3 +363,11 @@ textarea.input{min-height:160px;resize:vertical}
   .sunburst::before, .rbadge__ring, .dot, .caret, .v-cue__line::after, .pcard{animation:none}
   .v2 *{transition-duration:.01ms !important}
 }
+.skill:hover .skill__icon img {
+    filter: brightness(0) saturate(100%) invert(87%) sepia(60%) saturate(4594%) hue-rotate(23deg) brightness(115%) contrast(111%)
+}
+.pthumb__inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
