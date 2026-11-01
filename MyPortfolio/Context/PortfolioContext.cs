@@ -8,7 +8,7 @@ namespace MyPortfolio.Context
     {
         override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=GTC\\SQLEXPRESS;Database=MyPortfolioDb;Trusted_Connection=True;trust server certificate=true");
+            optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=MyPortfolioDb;Trusted_Connection=True;trust server certificate=true");
         }
 
         public DbSet<Feature> Features { get; set; }
